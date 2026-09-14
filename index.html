@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>姜佳乐 · 个人网站</title>
+<meta name="description" content="姜佳乐的个人网站。写代码，也做内容。一个人，把想法做成能用的东西。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:'FusionPixelSC';
+  src:url('https://cdn.jsdelivr.net/gh/TakWolf/fusion-pixel-font@2026.09.01/build/fusion-pixel-12px-proportional-zh_hans/fusion-pixel-12px-proportional-zh_hans.woff2') format('woff2'),
+      url('https://cdn.jsdelivr.net/gh/TakWolf/fusion-pixel-font@2026.09.01/build/fusion-pixel-12px-proportional-zh_hans/fusion-pixel-12px-proportional-zh_hans.woff') format('woff');
+  font-display:swap;
+}
+
+:root{
+  --paper:#FFF7EC;
+  --card:#FFFFFF;
+  --ink:#2B2B38;
+  --ink2:#6E6E7C;
+  --line:#E6DCC9;
+  --pink:#FF6B8A;
+  --mint:#4ECDC4;
+  --lemon:#FFC94D;
+  --px:'FusionPixelSC','Zpix','DotGothic16',ui-monospace,'Courier New',monospace;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Consolas,monospace;
+  --sans:'Inter','PingFang SC','Microsoft YaHei','Source Han Sans SC',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+@media(min-width:1024px){
+  body{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 12 12'%3E%3Cpath d='M0 0 L0 11 L3 8 L5 12 L7 11 L5 7 L9 7 Z' fill='%232B2B38' stroke='%23FFF7EC' stroke-width='0.7'/%3E%3C/svg%3E") 1 1,auto}
+  a,button,.card{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 12 12'%3E%3Cpath d='M0 0 L0 11 L3 8 L5 12 L7 11 L5 7 L9 7 Z' fill='%23FF6B8A' stroke='%23FFF7EC' stroke-width='0.7'/%3E%3C/svg%3E") 1 1,pointer}
+}
+h1,h2,h3,.px{font-family:var(--px);font-weight:400;letter-spacing:.04em;line-height:1.3}
+h1{font-size:clamp(26px,5.6vw,52px);margin:0 0 12px}
+h2{font-size:clamp(20px,3.2vw,30px);margin:0 0 6px}
+h3{font-size:18px;margin:0 0 8px}
+p{margin:0 0 14px;max-width:68ch}
+a{color:var(--pink);text-decoration:none;border-bottom:0}
+a:hover{border-bottom:4px dotted var(--pink)}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--ink2);text-transform:uppercase}
+
+.nav{position:fixed;left:0;right:0;top:0;z-index:75;background:var(--ink);color:var(--paper);border-bottom:3px solid var(--ink)}
+.nav-in{max-width:1200px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--px);font-size:16px;letter-spacing:.06em;color:var(--paper)}
+.logo svg{display:block}
+.nav nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.nav nav a{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--paper);padding:4px 9px;border:2px solid transparent;transition:none}
+.nav nav a:hover{border-color:var(--lemon);color:var(--lemon);border-bottom:2px solid var(--lemon)}
+
+/* ===== 首屏 · 游戏开场界面 ===== */
+.hero{position:relative;min-height:0;min-width:0}
+html[data-gate] body{overflow:hidden;height:100vh}
+.hero h1{font-size:clamp(30px,7vw,68px);text-shadow:3px 0 0 var(--pink),-3px 0 0 var(--pink),0 3px 0 var(--pink),0 -3px 0 var(--pink);color:var(--paper)}
+.hero .tagline{font-size:clamp(17px,2.4vw,22px);color:var(--ink);margin:2px 0 30px;max-width:30ch}
+.hero .sub{font-family:var(--mono);font-size:13px;letter-spacing:.14em;color:var(--ink2);margin:6px 0 26px;text-transform:uppercase}
+.start{font-family:var(--px);font-size:17px;letter-spacing:.1em;background:var(--lemon);color:var(--ink);border:3px solid var(--ink);padding:12px 30px;box-shadow:6px 6px 0 var(--ink);transition:transform .12s steps(2),box-shadow .12s steps(2)}
+.start:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+.start:active{transform:translate(5px,5px);box-shadow:1px 1px 0 var(--ink)}
+.skip{margin-top:24px;background:none;border:0;padding:4px 2px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink2);border-bottom:3px dotted var(--line)}
+.skip:hover{color:var(--pink);border-bottom-color:var(--pink)}
+.gate-hint{margin:14px 0 0;max-width:82vw;background:#fff;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);font-family:var(--px);font-size:13px;letter-spacing:.04em;color:var(--ink);padding:6px 12px;opacity:0;transform:translateY(6px);transition:opacity .12s steps(2),transform .12s steps(2)}
+.gate-hint.on{opacity:1;transform:translateY(0)}
+.gate-hint:empty{border:0;padding:0;margin:0;height:0}
+#wipe{position:fixed;inset:0;z-index:80;display:none;transform:translateY(-100%);background-color:#FFF7EC;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect width='16' height='16' fill='%23FF6B8A'/%3E%3Crect x='16' y='16' width='16' height='16' fill='%23FF6B8A'/%3E%3Crect x='16' width='16' height='16' fill='%234ECDC4'/%3E%3Crect y='16' width='16' height='16' fill='%234ECDC4'/%3E%3C/svg%3E")}
+.blink{animation:bk 1.1s steps(2) infinite}
+@keyframes bk{0%,50%{opacity:1}51%,100%{opacity:.15}}
+.cloud{position:absolute;opacity:.9;animation:drift 14s linear infinite}
+@keyframes drift{0%{transform:translateX(-8px)}50%{transform:translateX(10px)}100%{transform:translateX(-8px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== 翻页式布局（一屏一页 · PPT 式） ===== */
+.deck{
+  position:fixed;left:0;right:0;top:0;bottom:0;z-index:10;
+  overflow:hidden;   /* 只干一件事：把视口当作固定的取景框 */
+}
+/* 横向移动的是这层轨道，不是 .deck 本身 —— 这点是整页空白的关键：
+   六页并排后，「当前页」在 .deck 的本地坐标里位于 x = N×100% 处。
+   若直接给 .deck 加 translateX，裁切框会跟着一起平移，
+   当前页就永远留在裁切框之外、被整页裁掉，画面于是全空（封面 translateX(0) 才会正常）。
+   把裁切框钉死在视口、只移动内部轨道，页才会真正落进取景框里。 */
+.deck-track{
+  display:flex;flex-wrap:nowrap;height:100%;
+  transition:transform .42s linear;will-change:transform;
+}
+.slide{
+  flex:0 0 100%;width:100%;height:100%;
+  overflow-y:auto;overflow-x:hidden;
+  display:grid;grid-template-columns:minmax(0,1120px);
+  justify-content:center;align-content:start;
+  padding:86px 26px 86px;
+  scrollbar-width:thin;scrollbar-color:var(--ink) transparent;
+}
+.slide::-webkit-scrollbar{width:8px}
+.slide::-webkit-scrollbar-track{background:transparent}
+.slide::-webkit-scrollbar-thumb{background:var(--ink);box-shadow:inset 0 0 0 2px var(--paper)}
+.slide-cover{min-height:0;align-content:center;justify-items:center;text-align:center;padding-top:104px}
+.cover-meta{margin-top:26px;padding-top:14px;border-top:2px dashed var(--line);font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink2);line-height:1.9}
+/* 非当前页：内容整体隐藏，避免翻页途中看到下一页的排版骨架 */
+.deck .slide:not(.is-active) > *{opacity:0}
+/* 并把非当前页彻底藏起来，防止两件事：
+   ① 键盘 Tab 跑进看不见的页面里；
+   ② 关键 —— .deck 虽然只是 overflow:hidden 的裁切容器，但它依然算「可滚动容器」，
+      带 #s2 这类锚点载入时浏览器会把锚点滚进视野，给 .deck 记上一个 scrollLeft，
+      再叠加我们自己的 translateX，就整整多走一页，画面全空。
+      元素一旦 visibility:hidden，浏览器就不会再滚它，从源头掐掉这个位移。 */
+.deck .slide:not(.is-active){visibility:hidden}
+
+/* 侧面页码轨 */
+.rail{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:72;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+.rail-dot{display:flex;align-items:center;gap:9px;background:none;border:0;padding:0;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink2)}
+.rail-b{display:block;flex:0 0 auto;width:12px;height:12px;background:var(--paper);border:2px solid var(--ink)}
+.rail-t{opacity:0;transform:translateX(6px);transition:opacity .12s steps(2),transform .12s steps(2);background:var(--paper);border:2px solid var(--ink);padding:1px 7px;white-space:nowrap;color:var(--ink)}
+.rail-dot:hover .rail-t,.rail-dot:focus-visible .rail-t{opacity:1;transform:none}
+.rail-dot.on .rail-b{background:var(--pink);box-shadow:3px 3px 0 var(--ink)}
+@media(max-width:760px){
+  .rail{right:7px;gap:9px}
+  .rail-b{width:9px;height:9px}
+  .rail-t{display:none}
+}
+@media(max-height:520px){.rail{display:none}}
+
+/* 底部状态条 */
+footer.statusbar{position:fixed;left:0;right:0;bottom:0;z-index:74;margin:0;padding:0 20px 10px;background:var(--ink);color:var(--paper)}
+.sb-horizon{display:flex;height:20px;align-items:flex-end;gap:2px;max-width:1200px;margin:0 auto;overflow:hidden}
+.sb-horizon i{flex:1;background:var(--ink2);display:block}
+.sb-in{max-width:1200px;margin:0 auto;display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.08em}
+.sb-in .px{font-family:var(--px);font-size:14px;letter-spacing:.06em;color:var(--paper)}
+.sb-in .sb-mid{color:#9A97A6}
+.sb-pg{margin-left:auto;color:#9A97A6}
+.sb-pg b{font-family:var(--px);font-weight:400;font-size:15px;color:var(--lemon)}
+@media(max-width:640px){.sb-in .sb-mid{display:none}}
+
+/* 门禁期间收起所有「应用外壳」 */
+.nav,footer.statusbar,.rail{transition:opacity .18s steps(3)}
+html[data-gate] .nav,html[data-gate] footer.statusbar,html[data-gate] .rail{opacity:0;pointer-events:none}
+
+/* 首次翻页时的一次性操作提示 */
+.deck-tip{position:fixed;left:50%;bottom:98px;transform:translateX(-50%);z-index:78;background:var(--paper);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink);padding:7px 14px;opacity:0;pointer-events:none;transition:opacity .16s steps(3)}
+.deck-tip.on{opacity:1}
+@media(max-width:640px){.deck-tip{bottom:auto;top:74px;font-size:11px;padding:6px 11px}}
+
+/* ===== 每页专属进入动画 =====
+   填充模式一律用 backwards：动画结束后立刻交还正常样式，
+   这样卡片 hover 的位移/阴影不会被动画的 transform 永久覆盖。 */
+@keyframes aUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes aWipe{from{opacity:0;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes aPop{0%{opacity:0;transform:scale(.88)}65%{opacity:1;transform:scale(1.035)}100%{opacity:1;transform:scale(1)}}
+@keyframes aGrow{from{opacity:0;clip-path:inset(100% 0 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes aType{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+
+/* 01 · 封面：开机自检，逐级点亮 */
+#s1.is-active > *{animation:aPop .30s steps(4) backwards}
+#s1.is-active > h1{animation-delay:.07s}
+#s1.is-active > .tagline{animation-delay:.15s}
+#s1.is-active > .start{animation-delay:.24s}
+#s1.is-active > .gate-hint{animation-delay:.30s}
+#s1.is-active > .skip{animation-delay:.36s}
+#s1.is-active > .cover-meta{animation-delay:.44s}
+
+/* 02 · 关于我：档案拆封，画像与正文先后落位 */
+#s2.is-active > *{animation:aUp .30s steps(5) backwards}
+#s2.is-active > *:nth-child(2){animation-delay:.06s}
+#s2.is-active > *:nth-child(3){animation-delay:.12s}
+#s2.is-active > *:nth-child(4){animation-delay:.18s}
+#s2.is-active .about > *{animation:aUp .32s steps(5) backwards}
+#s2.is-active .about > *:nth-child(2){animation-delay:.12s}
+
+/* 03 · 作品：截图冲印，自左向右显影 */
+#s3.is-active > *{animation:aWipe .34s steps(6) backwards}
+#s3.is-active > *:nth-child(2){animation-delay:.05s}
+#s3.is-active > *:nth-child(3){animation-delay:.10s}
+#s3.is-active > *:nth-child(4){animation-delay:.15s}
+#s3.is-active .works > *{animation:aWipe .32s steps(6) backwards}
+#s3.is-active .works > *:nth-child(1){animation-delay:.16s}
+#s3.is-active .works > *:nth-child(2){animation-delay:.24s}
+#s3.is-active .works > *:nth-child(3){animation-delay:.32s}
+#s3.is-active .works > *:nth-child(4){animation-delay:.40s}
+#s3.is-active .works > *:nth-child(5){animation-delay:.48s}
+
+/* 04 · 能力：情景图从中心逐个弹出 */
+#s4.is-active > *{animation:aPop .30s steps(4) backwards}
+#s4.is-active > *:nth-child(2){animation-delay:.05s}
+#s4.is-active > *:nth-child(3){animation-delay:.10s}
+#s4.is-active > *:nth-child(4){animation-delay:.14s}
+#s4.is-active > *:nth-child(5){animation-delay:.50s}
+#s4.is-active .scene{animation:aPop .26s steps(4) backwards}
+#s4.is-active .scene:nth-child(1){animation-delay:.16s}
+#s4.is-active .scene:nth-child(2){animation-delay:.21s}
+#s4.is-active .scene:nth-child(3){animation-delay:.26s}
+#s4.is-active .scene:nth-child(4){animation-delay:.31s}
+#s4.is-active .scene:nth-child(5){animation-delay:.36s}
+#s4.is-active .scene:nth-child(6){animation-delay:.41s}
+#s4.is-active .scene:nth-child(7){animation-delay:.46s}
+
+/* 05 · 履历：时间轴自下而上生长 */
+#s5.is-active > *{animation:aGrow .30s steps(5) backwards}
+#s5.is-active > *:nth-child(2){animation-delay:.05s}
+#s5.is-active > *:nth-child(3){animation-delay:.10s}
+#s5.is-active > *:nth-child(4){animation-delay:.15s}
+#s5.is-active .tl-item{animation:aGrow .28s steps(5) backwards}
+#s5.is-active .tl-item:nth-child(1){animation-delay:.16s}
+#s5.is-active .tl-item:nth-child(2){animation-delay:.21s}
+#s5.is-active .tl-item:nth-child(3){animation-delay:.26s}
+#s5.is-active .tl-item:nth-child(4){animation-delay:.31s}
+#s5.is-active .tl-item:nth-child(5){animation-delay:.36s}
+#s5.is-active .tl-item:nth-child(6){animation-delay:.41s}
+#s5.is-active .tl-item:nth-child(7){animation-delay:.46s}
+#s5.is-active .tl-item:nth-child(8){animation-delay:.51s}
+
+/* 06 · 合作：终端逐行打印 */
+#s6.is-active > *{animation:aType .28s steps(3) backwards}
+#s6.is-active > *:nth-child(2){animation-delay:.05s}
+#s6.is-active > *:nth-child(3){animation-delay:.10s}
+#s6.is-active > *:nth-child(4){animation-delay:.15s}
+#s6.is-active > *:nth-child(5){animation-delay:.22s}
+#s6.is-active .contact-row{animation:aType .24s steps(3) backwards}
+#s6.is-active .contact-row:nth-child(1){animation-delay:.20s}
+#s6.is-active .contact-row:nth-child(2){animation-delay:.26s}
+#s6.is-active .contact-row:nth-child(3){animation-delay:.32s}
+#s6.is-active .contact-row:nth-child(4){animation-delay:.38s}
+#s6.is-active .contact-row:nth-child(5){animation-delay:.44s}
+#s6.is-active .contact-row:nth-child(6){animation-delay:.50s}
+
+section{margin:0}
+.sec-no{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--pink);text-transform:uppercase;margin-bottom:6px}
+.lead{font-size:17px;color:var(--ink)}
+
+.card{background:var(--card);border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:20px 22px;margin:18px 0}
+@media(min-width:760px){.card.off{margin-left:34px}}
+.grid2{display:grid;gap:18px}
+@media(min-width:760px){.grid2{grid-template-columns:1fr 1fr}}
+.grid2 .card{margin:0}
+
+ul.list{list-style:none;padding:0;margin:14px 0}
+ul.list li{position:relative;padding-left:26px;margin-bottom:10px;max-width:70ch}
+ul.list li::before{content:'';position:absolute;left:0;top:9px;width:12px;height:12px;background:var(--mint);box-shadow:3px 3px 0 var(--ink)}
+ul.list.no li::before{background:var(--pink)}
+.tag{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.06em;border:2px solid var(--ink);background:var(--lemon);padding:2px 8px;margin:3px 5px 3px 0}
+.tag.t2{background:var(--mint)}
+.tag.t3{background:var(--pink);color:#fff}
+.tag.ghost{background:var(--paper);border-style:dashed;color:var(--ink2)}
+
+/* ===== 关于我 ===== */
+.about{display:grid;gap:22px;align-items:start}
+@media(min-width:760px){.about{grid-template-columns:minmax(0,168px) minmax(0,1fr);gap:30px}}
+.facebox{background:#fff;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:12px;text-align:center}
+.facebox svg{display:block;width:100%;height:auto;image-rendering:pixelated}
+.side-label{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink2);margin:16px 0 6px;text-transform:uppercase}
+.about-h{font-size:17px;margin:24px 0 8px;padding-left:12px;border-left:5px solid var(--mint)}
+.about-h:first-of-type{margin-top:20px}
+.quote{background:#FFF3D0;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--lemon);padding:14px 16px;margin:20px 0;font-size:17px;line-height:1.75;color:var(--ink)}
+@media(min-width:760px){.quote{margin:20px 0 20px 34px}}
+
+/* ===== 作品 ===== */
+.works{display:grid;gap:20px}
+@media(min-width:760px){
+  .works{grid-template-columns:1fr 1fr}
+  .works .card{margin:0}
+  .works .card:nth-child(even){margin-top:30px}
+  .works .card.feature{grid-column:1 / -1;margin-top:0}
+}
+.works .card{margin:0}
+.works .card.feature{border-style:dashed;background:var(--paper)}
+.wk-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.wk-head svg{display:block;flex:0 0 auto}
+.wk-head h3{margin:0;font-size:18px}
+.wk-meta{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--ink2);margin:0 0 8px}
+.wk-desc{margin:0 0 8px;font-size:15px;color:var(--ink)}
+.wk-desc:last-of-type{margin-bottom:0}
+.wk-link{font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+
+/* 作品截图 */
+.wk-shot{margin:14px 0 0}
+.wk-shot:last-child{margin-bottom:0}
+.wk-shot img{
+  display:block;width:100%;height:auto;
+  background:#fff;border:2px solid var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+}
+.wk-shot-cap{
+  display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;
+  margin-top:6px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.05em;color:var(--ink2);
+}
+.wk-shot-cap span:first-child{color:var(--ink)}
+.card.feature .wk-shot img{box-shadow:6px 6px 0 var(--ink)}
+/* 三张成品图并排 */
+.wk-shots-row{display:grid;gap:12px;margin:14px 0 0}
+@media(min-width:560px){.wk-shots-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.wk-shots-row .wk-shot{margin:0}
+/* 截图灯箱 */
+.shot-zoom{cursor:zoom-in}
+#lightbox{
+  position:fixed;inset:0;z-index:90;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(43,43,56,.86);padding:24px;
+}
+#lightbox.on{display:flex}
+#lightbox img{
+  max-width:min(1100px,96vw);max-height:88vh;width:auto;height:auto;
+  background:#fff;border:3px solid var(--paper);box-shadow:8px 8px 0 rgba(0,0,0,.35);
+}
+#lbClose{
+  position:absolute;top:16px;right:18px;width:38px;height:38px;padding:0;
+  background:var(--lemon);color:var(--ink);border:3px solid var(--ink);
+  font-family:var(--mono);font-size:20px;line-height:32px;text-align:center;
+  box-shadow:4px 4px 0 var(--ink);
+}
+#lbClose:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+#lbHint{
+  position:absolute;bottom:18px;left:0;right:0;text-align:center;
+  font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--paper);
+  opacity:.75;
+}
+
+/* ===== 能力 · 像素情景图 ===== */
+.scenes{display:grid;gap:16px;margin-top:20px}
+@media(min-width:640px){.scenes{grid-template-columns:1fr 1fr}}
+@media(min-width:1120px){
+  .scenes{grid-template-columns:repeat(3,1fr)}
+  .scenes .scene:last-child{grid-column:2}
+}
+.scene{
+  display:flex;flex-direction:column;
+  background:var(--card);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);
+  padding:11px 12px 13px;
+  transition:transform .12s steps(2),box-shadow .12s steps(2);
+}
+.scene:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.scene-art{background:var(--paper);border:2px solid var(--ink);padding:5px 6px;margin-bottom:10px}
+.scene-art svg{display:block;width:100%;height:auto}
+.scene h3{margin:0 0 3px;font-size:16px;line-height:1.25}
+.scene-sub{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--ink2);margin:0 0 8px;max-width:none;line-height:1.6}
+.scene-line{margin:0 0 12px;font-size:13px;line-height:1.75;color:var(--ink);max-width:none}
+.scene-tags{margin:auto 0 0;padding-top:2px}
+.scene-tags .tag{font-size:11px;padding:1px 6px;margin:2px 4px 2px 0}
+.scene-note{
+  margin:20px 0 0;padding:12px 14px;background:var(--paper);
+  border:2px dashed var(--ink);font-size:14px;color:var(--ink2);max-width:none;
+}
+
+/* ===== 能力（旧 · 分级条，已被情景图取代） ===== */
+
+/* ===== 履历 · 像素时间轴 ===== */
+.tl{margin:18px 0 0;padding:0;list-style:none}
+.tl-item{position:relative;padding-left:34px;padding-bottom:16px}
+.tl-item .ln{position:absolute;left:15px;top:0;bottom:0;width:4px;background:var(--ink)}
+.tl-item:first-child .ln{top:23px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item:last-child .ln{top:0;bottom:auto;height:23px}
+.tl-item .nd{position:absolute;left:7px;top:13px;width:20px;height:20px;background:var(--ink);display:flex;align-items:center;justify-content:center}
+.tl-item .nd i{display:block;width:12px;height:12px;background:var(--mint)}
+.tl-item.future .nd i{background:var(--lemon)}
+.tl-item .card{margin:0}
+.tl-item.future .card{border-style:dashed;background:var(--paper);box-shadow:5px 5px 0 var(--line)}
+.tl-time{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink2);margin-bottom:3px}
+.tl-item .card h3{margin-bottom:4px}
+.tl-item .card p{margin:0;font-size:15px}
+
+/* ===== 现在（板块已删除 · 样式一并移除） ===== */
+
+/* ===== 合作 ===== */
+.contact-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 0;border-bottom:2px dashed var(--line)}
+.contact-row:last-child{border-bottom:0}
+.contact-row .k{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink2);min-width:76px}
+/* 让取值占满剩余宽度并在内部换行；否则遇到长文案（如「AI 落地」那行）
+   整个 .v 会被 flex-wrap 顶到下一行，标签孤零零占一行 */
+.contact-row .v{font-size:15px;flex:1 1 240px;min-width:0}
+
+/* ===== 合作 · 可以找我做什么 ===== */
+.scope .contact-row{align-items:flex-start;padding:12px 0}
+.scope .contact-row .k{padding-top:2px}
+.scope-foot{margin:12px 0 0;font-size:14px;color:var(--ink2);max-width:none}
+#phoneSlot{font-family:var(--mono);font-size:15px;letter-spacing:.04em}
+.reveal-phone{font-family:var(--px);font-size:13px;background:var(--mint);color:var(--ink);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:4px 12px;transition:transform .12s steps(2),box-shadow .12s steps(2)}
+.reveal-phone:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.reveal-phone:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+
+/* 底部状态条样式见上方「翻页式布局」段 */
+
+#buddy{position:fixed;right:62px;bottom:74px;z-index:76;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.buddy-body{position:relative}
+#buddySvg{display:block;width:80px;height:80px;cursor:pointer}
+#buddy .bubble{max-width:190px;background:#fff;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);font-family:var(--px);font-size:13px;letter-spacing:.04em;line-height:1.5;color:var(--ink);padding:6px 11px;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .12s steps(2),transform .12s steps(2)}
+#buddy .bubble.on{opacity:1;transform:translateY(0)}
+#closeBuddy{position:absolute;top:-7px;left:-7px;width:20px;height:20px;padding:0;background:var(--ink);color:var(--paper);border:0;font-family:var(--mono);font-size:14px;line-height:20px;text-align:center;opacity:0;transition:opacity .12s steps(2)}
+#buddy:hover #closeBuddy,#closeBuddy:focus{opacity:1}
+@media(max-width:640px){
+  #buddy{right:42px;bottom:68px;gap:6px}
+  #buddySvg{width:60px;height:60px}
+  #buddy .bubble{max-width:150px;font-size:12px}
+}
+.heart{position:fixed;width:21px;height:18px;pointer-events:none;z-index:99}
+.spark{position:fixed;width:7px;height:7px;pointer-events:none;z-index:99}
+/* 滚动逐格点亮已废止：改为「当前页」专属的进入动画（见上方翻页式布局段） */
+</style>
+<script>
+/* 尽早决定是否上锁：带锚点直链进来的直接放行 */
+(function(){
+  try{
+    var h = window.location.hash;
+    if(!(h && h.length > 2)) document.documentElement.setAttribute('data-gate','1');
+  }catch(e){}
+})();
+</script>
+</head>
+<body>
+
+<!-- 像素精灵：INFJ 绿老头（七张情景图共用同一个角色） -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="wiz">
+      <!-- 魔法杖（先画，被手压住） -->
+      <rect x="19" y="2" width="5" height="5" fill="#2B2B38"/>
+      <rect x="20" y="3" width="3" height="3" fill="#FF6B8A"/>
+      <rect x="20" y="3" width="1" height="1" fill="#FFF7EC"/>
+      <rect x="20" y="7" width="2" height="24" fill="#FFF7EC"/>
+      <rect x="21" y="7" width="1" height="24" fill="#E6DCC9"/>
+      <rect x="18" y="7" width="5" height="1" fill="#2B2B38"/>
+      <!-- 尖顶帽 -->
+      <rect x="11" y="0" width="2" height="1" fill="#2B2B38"/>
+      <rect x="10" y="1" width="4" height="1" fill="#2B2B38"/>
+      <rect x="11" y="1" width="2" height="1" fill="#4ECDC4"/>
+      <rect x="9" y="2" width="6" height="1" fill="#2B2B38"/>
+      <rect x="10" y="2" width="4" height="1" fill="#4ECDC4"/>
+      <rect x="8" y="3" width="8" height="1" fill="#2B2B38"/>
+      <rect x="9" y="3" width="6" height="1" fill="#4ECDC4"/>
+      <rect x="7" y="4" width="10" height="1" fill="#2B2B38"/>
+      <rect x="8" y="4" width="8" height="1" fill="#FFC94D"/>
+      <rect x="6" y="5" width="12" height="1" fill="#2B2B38"/>
+      <rect x="6" y="6" width="12" height="1" fill="#2B2B38"/>
+      <!-- 脸 -->
+      <rect x="6" y="7" width="12" height="4" fill="#2B2B38"/>
+      <rect x="7" y="7" width="10" height="3" fill="#FFF7EC"/>
+      <rect x="9" y="7" width="2" height="1" fill="#2B2B38"/>
+      <rect x="14" y="7" width="2" height="1" fill="#2B2B38"/>
+      <rect x="9" y="8" width="1" height="2" fill="#2B2B38"/>
+      <rect x="14" y="8" width="1" height="2" fill="#2B2B38"/>
+      <rect x="11" y="8" width="2" height="1" fill="#E6DCC9"/>
+      <rect x="7" y="9" width="1" height="1" fill="#E6DCC9"/>
+      <rect x="16" y="9" width="1" height="1" fill="#E6DCC9"/>
+      <!-- 大白胡子（垂到胸口） -->
+      <rect x="5" y="11" width="14" height="2" fill="#2B2B38"/>
+      <rect x="6" y="11" width="12" height="2" fill="#FFF7EC"/>
+      <rect x="6" y="13" width="12" height="1" fill="#2B2B38"/>
+      <rect x="7" y="13" width="10" height="1" fill="#FFF7EC"/>
+      <rect x="7" y="14" width="10" height="1" fill="#2B2B38"/>
+      <rect x="8" y="14" width="8" height="1" fill="#FFF7EC"/>
+      <rect x="8" y="15" width="8" height="1" fill="#2B2B38"/>
+      <rect x="9" y="15" width="6" height="1" fill="#FFF7EC"/>
+      <rect x="9" y="16" width="6" height="1" fill="#2B2B38"/>
+      <rect x="10" y="16" width="4" height="1" fill="#FFF7EC"/>
+      <!-- 绿色魔法袍 -->
+      <rect x="4" y="17" width="14" height="2" fill="#2B2B38"/>
+      <rect x="5" y="17" width="12" height="2" fill="#4ECDC4"/>
+      <rect x="3" y="19" width="16" height="9" fill="#2B2B38"/>
+      <rect x="4" y="19" width="14" height="9" fill="#4ECDC4"/>
+      <rect x="2" y="28" width="18" height="4" fill="#2B2B38"/>
+      <rect x="3" y="28" width="16" height="3" fill="#4ECDC4"/>
+      <rect x="4" y="22" width="14" height="2" fill="#FFC94D"/>
+      <rect x="10" y="22" width="2" height="2" fill="#2B2B38"/>
+      <rect x="6" y="25" width="1" height="2" fill="#E6DCC9"/>
+      <rect x="15" y="25" width="1" height="2" fill="#E6DCC9"/>
+      <rect x="12" y="27" width="4" height="2" fill="#E6DCC9"/>
+      <!-- 前臂（压在杖身上） -->
+      <rect x="15" y="16" width="7" height="5" fill="#2B2B38"/>
+      <rect x="16" y="17" width="5" height="3" fill="#4ECDC4"/>
+    </g>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="nav-in">
+    <div class="logo">
+      <svg width="18" height="18" viewBox="0 0 12 12" aria-hidden="true">
+        <rect x="0" y="0" width="4" height="4" fill="#FFC94D"/>
+        <rect x="4" y="0" width="4" height="4" fill="#FFF7EC"/>
+        <rect x="8" y="0" width="4" height="4" fill="#FF6B8A"/>
+        <rect x="0" y="4" width="4" height="4" fill="#4ECDC4"/>
+        <rect x="4" y="4" width="4" height="4" fill="#FF6B8A"/>
+        <rect x="8" y="4" width="4" height="4" fill="#FFC94D"/>
+        <rect x="0" y="8" width="4" height="4" fill="#FFF7EC"/>
+        <rect x="4" y="8" width="4" height="4" fill="#FFC94D"/>
+        <rect x="8" y="8" width="4" height="4" fill="#4ECDC4"/>
+      </svg>
+      姜佳乐
+    </div>
+    <nav>
+      <a href="#s2">02 关于我</a>
+      <a href="#s3">03 作品</a>
+      <a href="#s4">04 能力</a>
+      <a href="#s5">05 履历</a>
+      <a href="#s6">06 合作</a>
+    </nav>
+  </div>
+</header>
+
+<div class="deck" id="deck">
+ <div class="deck-track" id="track">
+
+  <!-- ===== 01 封面 ===== -->
+  <section id="s1" class="slide slide-cover hero" data-name="封面">
+  <svg class="cloud" style="left:8%;top:14%" width="64" height="26" viewBox="0 0 16 7" aria-hidden="true">
+    <rect x="3" y="2" width="9" height="3" fill="#FFFFFF" stroke="#2B2B38" stroke-width=".4"/>
+    <rect x="1" y="4" width="13" height="3" fill="#FFFFFF" stroke="#2B2B38" stroke-width=".4"/>
+  </svg>
+  <svg class="cloud" style="right:10%;top:26%;animation-duration:19s" width="46" height="20" viewBox="0 0 16 7" aria-hidden="true">
+    <rect x="4" y="1" width="7" height="3" fill="#FFFFFF" stroke="#2B2B38" stroke-width=".4"/>
+    <rect x="2" y="3" width="11" height="3" fill="#FFFFFF" stroke="#2B2B38" stroke-width=".4"/>
+  </svg>
+  <svg class="cloud" style="left:16%;bottom:18%;animation-duration:23s" width="38" height="16" viewBox="0 0 16 7" aria-hidden="true">
+    <rect x="4" y="1" width="7" height="3" fill="#FFFFFF" stroke="#2B2B38" stroke-width=".4"/>
+    <rect x="2" y="3" width="11" height="3" fill="#FFFFFF" stroke="#2B2B38" stroke-width=".4"/>
+  </svg>
+  <p class="mono" style="margin-bottom:14px">personal site · 2024 级 · 成都</p>
+  <h1>姜佳乐</h1>
+  <p class="tagline">一个人，把想法做成能用的东西</p>
+  <button class="start" id="startBtn">▶ PRESS START <span class="blink">_</span></button>
+  <p class="gate-hint" id="gateHint" role="status" aria-live="polite"></p>
+  <button class="skip" id="skipBtn">不想按？直接往下翻 →</button>
+  <div class="cover-meta">
+    数字广播电视技术 · 2024 级　现大三 · 2027 年毕业<br>
+    成都 · 双流　INFJ · SIR
+  </div>
+  </section>
+
+  <!-- ===== 02 关于我 ===== -->
+  <section id="s2" class="slide" data-name="关于我">
+      <div class="sec-no">02 · about</div>
+      <h2>关于我</h2>
+      <p class="lead">INFJ / SIR。这不是两个标签，是我做事方式的说明书。</p>
+
+      <div class="about">
+        <div>
+          <div class="facebox">
+            <svg viewBox="0 0 16 16" shape-rendering="crispEdges" role="img" aria-label="像素巫师形象：白胡子、绿袍、魔法杖">
+              <title>像素巫师 · 绿老头</title>
+              <!-- 魔法杖 -->
+              <rect x="13" y="2" width="1" height="1" fill="#FF6B8A"/>
+              <rect x="12" y="3" width="1" height="1" fill="#E6DCC9"/>
+              <rect x="12" y="4" width="1" height="3" fill="#FFF7EC"/>
+              <rect x="12" y="7" width="1" height="8" fill="#FFF7EC"/>
+              <rect x="13" y="7" width="1" height="7" fill="#E6DCC9"/>
+              <!-- 尖顶帽 -->
+              <rect x="5" y="0" width="5" height="1" fill="#2B2B38"/>
+              <rect x="5" y="1" width="6" height="1" fill="#2B2B38"/>
+              <rect x="4" y="2" width="8" height="1" fill="#2B2B38"/>
+              <rect x="5" y="1" width="5" height="1" fill="#4ECDC4"/>
+              <rect x="5" y="2" width="6" height="1" fill="#4ECDC4"/>
+              <!-- 帽檐 -->
+              <rect x="3" y="3" width="10" height="1" fill="#2B2B38"/>
+              <rect x="4" y="3" width="8" height="1" fill="#2B2B38"/>
+              <!-- 脸部 -->
+              <rect x="4" y="4" width="8" height="5" fill="#2B2B38"/>
+              <rect x="5" y="5" width="6" height="4" fill="#FFF7EC"/>
+              <!-- 眼睛 -->
+              <rect x="5" y="6" width="1" height="1" fill="#2B2B38"/>
+              <rect x="10" y="6" width="1" height="1" fill="#2B2B38"/>
+              <!-- 大鼻子 -->
+              <rect x="8" y="6" width="1" height="2" fill="#2B2B38"/>
+              <!-- 眉毛 -->
+              <rect x="5" y="5" width="1" height="1" fill="#E6DCC9"/>
+              <rect x="10" y="5" width="1" height="1" fill="#E6DCC9"/>
+              <!-- 大白胡子 -->
+              <rect x="4" y="9" width="8" height="1" fill="#2B2B38"/>
+              <rect x="5" y="10" width="6" height="1" fill="#2B2B38"/>
+              <rect x="6" y="11" width="4" height="1" fill="#2B2B38"/>
+              <rect x="5" y="9" width="6" height="1" fill="#FFF7EC"/>
+              <rect x="6" y="10" width="4" height="1" fill="#FFF7EC"/>
+              <rect x="7" y="11" width="2" height="1" fill="#FFF7EC"/>
+              <rect x="4" y="8" width="1" height="2" fill="#FFF7EC"/>
+              <rect x="11" y="8" width="1" height="2" fill="#FFF7EC"/>
+              <!-- 绿色魔法袍 -->
+              <rect x="3" y="12" width="10" height="4" fill="#2B2B38"/>
+              <rect x="4" y="12" width="8" height="4" fill="#4ECDC4"/>
+              <rect x="10" y="13" width="2" height="3" fill="#E6DCC9"/>
+              <!-- 袍上金色扣 -->
+              <rect x="7" y="13" width="1" height="1" fill="#FFC94D"/>
+              <rect x="7" y="15" width="1" height="1" fill="#FFC94D"/>
+              <!-- 袍摆星纹 -->
+              <rect x="5" y="14" width="1" height="1" fill="#2B2B38"/>
+              <rect x="9" y="15" width="1" height="1" fill="#2B2B38"/>
+            </svg>
+          </div>
+          <div class="mono" style="font-size:11px;letter-spacing:.06em;margin-top:8px;text-align:center">INFJ · SIR</div>
+
+          <div class="side-label">性格标签</div>
+          <div>
+            <span class="tag">一个人能做完</span>
+            <span class="tag t2">跑步的人</span>
+            <span class="tag t3">细节控</span>
+            <span class="tag">慢但不断</span>
+            <span class="tag t2">手比嘴快</span>
+            <span class="tag">边做边学</span>
+            <span class="tag t3">依据事实说话</span>
+            <span class="tag t2">INFJ</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="lead">
+            我叫姜佳乐，2004 年 10 月出生在四川广安，现在就读于四川文化产业职业学院。
+          </p>
+
+          <p>
+            如果只看两个字母和三个字母——<strong>INFJ</strong>、<strong>SIR</strong>——大概看不出我是谁。但它们确实是我最近一次自我校准的结果，而且回过头看，我这些年做的选择，基本都在这两个框架里。
+          </p>
+
+          <h3 class="about-h">INFJ · 提倡者</h3>
+          <p>
+            INFJ 的四个字母分别是：内向、直觉、情感、判断。翻成我的日常，是这几件事：
+          </p>
+          <ul class="list">
+            <li><strong>I（内向）</strong>——我的能量来自独处，不来自人群。一场热闹的会后我需要一个人待着才能回血，所以我能长时间一个人写代码、跑流程、剪片子，不觉得闷。</li>
+            <li><strong>N（直觉）</strong>——我更习惯先看整体结构，再看细节。拿到一个需求，我会先在脑子里把它拆成模块，再动手。这也是为什么我上手一个陌生工具很快。</li>
+            <li><strong>F（情感）</strong>——我做决定时会考虑每个人的感受。做内容时我总在想「观众看到这里会怎么想」；带协会的时候，我会记得谁最近状态不好。</li>
+            <li><strong>J（判断）</strong>——我需要事情有结论、有进度。清单、流程、时间点，这些让我安心。所以我做的东西一般都能按时交出来。</li>
+          </ul>
+
+          <div class="quote">
+            我不是不喜欢人，我只是更喜欢「先做完，再说」。
+            <div class="mono" style="margin-top:8px;font-size:11px">关于 INFJ 的 I</div>
+          </div>
+
+          <p>
+            这套特质对我的工作影响很直接：<strong>它让我能一个人把一个东西从想法做到能用</strong>。从需求拆解、技术选型、写到上线，中间不需要很多人接力，这是 INFJ 那种「先在心里把事情走一遍」的习惯换来的。
+          </p>
+          <p>
+            代价也真实存在——我话不多，也不擅长寒暄。合作的时候，我更希望对方直接说清楚想要什么，而不是先聊二十分钟关系。
+          </p>
+
+          <h3 class="about-h">SIR · 社会型 · 研究型 · 实用型</h3>
+          <p>
+            霍兰德三个字母，说的是「我喜欢在什么样的环境里做事」。
+          </p>
+          <ul class="list">
+            <li><strong>S（社会型）</strong>——我在招生就业处学生志愿者协会待了三年，从志愿者做到会长。帮人解决一个具体问题，比拿一个奖更让我有感觉。</li>
+            <li><strong>R（研究型）</strong>——我喜欢弄明白原理。遇到不会的东西，我的第一反应不是找人问，是先自己拆开看。</li>
+            <li><strong>I（实用型）</strong>——我必须要动手做出来。想得再清楚，没有能跑起来的东西，对我来说就等于没做。</li>
+          </ul>
+          <p>
+            <strong>SIR 和 INFJ 是同一件事的两种说法</strong>：一个说我想帮人，一个说我要把东西做出来；一个讲我看得远，一个讲我要落地。拼在一起就是我现在在做的事——写工具、做内容，让人用得上。
+          </p>
+
+          <h3 class="about-h">兴趣爱好</h3>
+          <p>
+            <strong>中长跑</strong>。从初中开始跑，一开始是跟着父亲一起，为了减重；后来是为了中考一千米；再后来，跑这件事本身成了习惯。我喜欢那种持续运动之后的多巴胺，也喜欢跑完一个人慢慢走回去的那段路。跑步和 INFJ 是一回事——都是「一个人，长期，做下去」。
+          </p>
+          <p>
+            <strong>听音乐</strong>。写代码的时候耳机基本不摘。音乐是我进入专注状态的开关。
+          </p>
+          <p>
+            <strong>发呆</strong>。听起来不像爱好，但对我来说它很必要。N 这个字母需要一个不被打扰的空白时段，把白天收进来的东西重新排一遍。我很多想法的雏形，都是在发呆的时候冒出来的。
+          </p>
+
+          <p style="margin-bottom:0">
+            现在我是四川文化产业职业学院数字广播电视技术专业 2024 级学生，也是学校招生就业处学生志愿者协会的会长——入学就入了会，今年是第三年，现在带着一群同学做事；同时在曼游生涯，从助理做起，现在做后端开发。明年 4 月，我考专升本。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 03 作品 ===== -->
+    <section id="s3" class="slide" data-name="作品">
+      <div class="sec-no">03 · works</div>
+      <h2>作品</h2>
+      <p class="lead">五件做过的东西。前三件有截图，后两件一笔带过。</p>
+
+      <div class="works">
+
+        <!-- ① GEO 监测工具 · 特色大卡 -->
+        <div class="card feature">
+          <div class="wk-head">
+            <svg width="34" height="34" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+              <rect x="1" y="1" width="14" height="1" fill="#2B2B38"/>
+              <rect x="1" y="2" width="1" height="12" fill="#2B2B38"/>
+              <rect x="1" y="12" width="14" height="1" fill="#2B2B38"/>
+              <rect x="3" y="8" width="2" height="3" fill="#4ECDC4"/>
+              <rect x="6" y="6" width="2" height="5" fill="#FF6B8A"/>
+              <rect x="9" y="4" width="2" height="7" fill="#FFC94D"/>
+            </svg>
+            <h3>曼游生涯 · GEO 监测工具</h3>
+          </div>
+          <p class="wk-meta">2026 · 曼游生涯 · 数据面板与报告生成</p>
+          <p class="wk-desc">
+            一套给品牌做「AI 平台可见度」体检的工具。把品牌词和行业关键词投给豆包、Kimi、智谱 GLM、DeepSeek 等 AI 平台，看它们在真实回答里会不会主动提到这个品牌。
+          </p>
+          <p class="wk-desc">
+            报告拆成总览、关键词、场景、渠道能力、品牌词健康度、风险机会、行动建议、原始明细九块，全部可追溯。其中一个核心判断是：AI 复述了品牌名但紧接着说「查不到」，<strong>不能算被看见</strong>——这种「假阳性」会被单独筛掉，另列一张可逐条复核的清单。
+          </p>
+          <div class="wk-shot">
+            <img src="assets/geo-report.png" alt="GEO 监测报告总览看板截图" loading="lazy">
+            <div class="wk-shot-cap">
+              <span>图 1 · 总览看板</span>
+              <span>核心指标 / 报告导航</span>
+            </div>
+          </div>
+          <div class="wk-shot">
+            <img src="assets/geo-metrics.png" alt="GEO 监测口径修正版指标定义表截图" loading="lazy">
+            <div class="wk-shot-cap">
+              <span>图 2 · 口径修正版</span>
+              <span>主 KPI 与各项指标定义</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② 招生咨询系统 -->
+        <div class="card">
+          <div class="wk-head">
+            <svg width="34" height="34" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+              <rect x="1" y="1" width="14" height="14" fill="#2B2B38"/>
+              <rect x="2" y="4" width="12" height="10" fill="#FFFFFF"/>
+              <rect x="2" y="2" width="3" height="1" fill="#FFC94D"/>
+              <rect x="6" y="2" width="3" height="1" fill="#FFC94D"/>
+              <rect x="4" y="6" width="8" height="1" fill="#4ECDC4"/>
+              <rect x="4" y="8" width="6" height="1" fill="#4ECDC4"/>
+              <rect x="4" y="10" width="7" height="1" fill="#4ECDC4"/>
+            </svg>
+            <h3>四川文化产业职业学院 · 招生咨询系统</h3>
+          </div>
+          <p class="wk-meta">2025 – 2026 · 招就处值班自用 · HTML / CSS / JS</p>
+          <p class="wk-desc">
+            给招就处值班做的一个查询入口。搜问题、专业、部门都能快速定位，现有常见问题分类问答、2025 年最低录取分查询、按学院分类的专业介绍、校内 30 个部门电话、2026 年招生专业计划五块。移动端优先，值班时手机随手就能查。
+          </p>
+          <div class="wk-shot">
+            <img src="assets/admission-app.png" alt="招生咨询系统首页截图" loading="lazy">
+            <div class="wk-shot-cap">
+              <span>图 3 · 首页</span>
+              <span>五个查询入口</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ③ 小红书配图工作台 -->
+        <div class="card">
+          <div class="wk-head">
+            <svg width="34" height="34" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+              <rect x="1" y="2" width="14" height="12" fill="#2B2B38"/>
+              <rect x="2" y="3" width="12" height="10" fill="#FFFFFF"/>
+              <rect x="3" y="4" width="3" height="3" fill="#FF6B8A"/>
+              <rect x="5" y="8" width="4" height="4" fill="#4ECDC4"/>
+              <rect x="10" y="5" width="3" height="4" fill="#FFC94D"/>
+            </svg>
+            <h3>小红书配图工作台</h3>
+          </div>
+          <p class="wk-meta">2026 · 单文件 HTML · Canvas 编辑器</p>
+          <p class="wk-desc">
+            把文案一次性做成一套小红书图。支持导入内容包、图层 / 背景 / 贴纸 / 文本四类编辑、工程保存与载入、撤销重做、整册导出 PNG。默认 3:4 画布，导出 1080×1440。
+          </p>
+          <div class="wk-shot">
+            <img src="assets/xhs-workbench.png" alt="小红书配图工作台编辑器截图" loading="lazy">
+            <div class="wk-shot-cap">
+              <span>图 4 · 编辑器</span>
+              <span>画布 / 图层栏 / 导入导出</span>
+            </div>
+          </div>
+          <div class="wk-shots-row">
+            <div class="wk-shot">
+              <img src="assets/xhs-card-1.png" alt="工作台产出的成品图：避坑自查 坑3-4" loading="lazy">
+              <div class="wk-shot-cap">
+                <span>图 5 · 产出</span>
+              </div>
+            </div>
+            <div class="wk-shot">
+              <img src="assets/xhs-card-2.png" alt="工作台产出的成品图：坑三坑四 解法" loading="lazy">
+              <div class="wk-shot-cap">
+                <span>图 6 · 产出</span>
+              </div>
+            </div>
+            <div class="wk-shot">
+              <img src="assets/xhs-card-3.png" alt="工作台产出的成品图：坑5 心里话" loading="lazy">
+              <div class="wk-shot-cap">
+                <span>图 7 · 产出</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ④ 一笔带过 -->
+        <div class="card">
+          <div class="wk-head">
+            <svg width="34" height="34" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+              <rect x="1" y="2" width="14" height="12" fill="#2B2B38"/>
+              <rect x="2" y="5" width="12" height="6" fill="#FF6B8A"/>
+              <rect x="2" y="3" width="2" height="1" fill="#FFF7EC"/>
+              <rect x="5" y="3" width="2" height="1" fill="#FFF7EC"/>
+              <rect x="8" y="3" width="2" height="1" fill="#FFF7EC"/>
+              <rect x="11" y="3" width="2" height="1" fill="#FFF7EC"/>
+              <rect x="2" y="12" width="2" height="1" fill="#FFF7EC"/>
+              <rect x="5" y="12" width="2" height="1" fill="#FFF7EC"/>
+              <rect x="8" y="12" width="2" height="1" fill="#FFF7EC"/>
+              <rect x="11" y="12" width="2" height="1" fill="#FFF7EC"/>
+            </svg>
+            <h3>《创业者的 101 个法律坑》</h3>
+          </div>
+          <p class="wk-meta">2026 – 至今 · EP.001 – 011+ · 多平台短视频</p>
+          <p class="wk-desc">逐字配图稿、TTS 断句稿、三平台配图与封面，整套内容流程自己跑通。</p>
+        </div>
+
+        <!-- ⑤ 一笔带过 -->
+        <div class="card">
+          <div class="wk-head">
+            <svg width="34" height="34" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+              <rect x="3" y="1" width="10" height="14" fill="#2B2B38"/>
+              <rect x="4" y="3" width="8" height="10" fill="#FFFFFF"/>
+              <rect x="5" y="5" width="6" height="1" fill="#4ECDC4"/>
+              <rect x="5" y="7" width="6" height="1" fill="#4ECDC4"/>
+              <rect x="5" y="9" width="4" height="1" fill="#4ECDC4"/>
+              <rect x="6" y="12" width="4" height="1" fill="#FF6B8A"/>
+            </svg>
+            <h3>其他自己写的小工具</h3>
+          </div>
+          <p class="wk-meta">2026 · 多个单文件工具</p>
+          <p class="wk-desc">专升本英语 PWA、FitLife 健康管理、AI 学习仪表盘等。缺什么就写什么，用起来顺手比做得漂亮重要。</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== 04 能力 ===== -->
+    <section id="s4" class="slide" data-name="能力">
+      <div class="sec-no">04 · skills</div>
+      <h2>能力</h2>
+      <p class="lead">不设等级评分，代之以七幅工作场景。每一幅对应一类实际能力，图中的绿袍巫师为统一形象。</p>
+
+      <div class="scenes">
+
+        <div class="scene">
+          <div class="scene-art">
+            <svg viewBox="0 0 72 40" shape-rendering="crispEdges" role="img" aria-label="绿袍巫师站在任务看板前，看板后是四名团队成员">
+              <title>组织统筹</title>
+              <rect x="0" y="38" width="72" height="1" fill="#E6DCC9"/>
+              <use href="#wiz" transform="translate(2,6)"/>
+              <rect x="28" y="5" width="30" height="22" fill="#2B2B38"/>
+              <rect x="29" y="6" width="28" height="20" fill="#FFFFFF"/>
+              <rect x="39" y="6" width="1" height="20" fill="#E6DCC9"/>
+              <rect x="49" y="6" width="1" height="20" fill="#E6DCC9"/>
+              <rect x="30" y="7" width="8" height="3" fill="#4ECDC4"/>
+              <rect x="40" y="7" width="8" height="3" fill="#FFC94D"/>
+              <rect x="50" y="7" width="6" height="3" fill="#FF6B8A"/>
+              <rect x="29" y="10" width="28" height="1" fill="#2B2B38"/>
+              <rect x="30" y="12" width="8" height="5" fill="#2B2B38"/>
+              <rect x="31" y="13" width="6" height="3" fill="#4ECDC4"/>
+              <rect x="30" y="18" width="8" height="5" fill="#2B2B38"/>
+              <rect x="31" y="19" width="6" height="3" fill="#4ECDC4"/>
+              <rect x="40" y="12" width="8" height="5" fill="#2B2B38"/>
+              <rect x="41" y="13" width="6" height="3" fill="#FFC94D"/>
+              <rect x="40" y="18" width="8" height="5" fill="#2B2B38"/>
+              <rect x="41" y="19" width="6" height="3" fill="#FFC94D"/>
+              <rect x="50" y="12" width="6" height="5" fill="#2B2B38"/>
+              <rect x="51" y="13" width="4" height="3" fill="#FF6B8A"/>
+              <rect x="50" y="18" width="6" height="5" fill="#2B2B38"/>
+              <rect x="51" y="19" width="4" height="3" fill="#FF6B8A"/>
+              <rect x="30" y="30" width="2" height="2" fill="#2B2B38"/>
+              <rect x="29" y="32" width="4" height="6" fill="#2B2B38"/>
+              <rect x="29" y="32" width="3" height="5" fill="#4ECDC4"/>
+              <rect x="37" y="30" width="2" height="2" fill="#2B2B38"/>
+              <rect x="36" y="32" width="4" height="6" fill="#2B2B38"/>
+              <rect x="36" y="32" width="3" height="5" fill="#FFC94D"/>
+              <rect x="44" y="30" width="2" height="2" fill="#2B2B38"/>
+              <rect x="43" y="32" width="4" height="6" fill="#2B2B38"/>
+              <rect x="43" y="32" width="3" height="5" fill="#FF6B8A"/>
+              <rect x="51" y="30" width="2" height="2" fill="#2B2B38"/>
+              <rect x="50" y="32" width="4" height="6" fill="#2B2B38"/>
+              <rect x="50" y="32" width="3" height="5" fill="#4ECDC4"/>
+              <rect x="63" y="12" width="1" height="26" fill="#E6DCC9"/>
+              <rect x="64" y="12" width="7" height="5" fill="#2B2B38"/>
+              <rect x="64" y="13" width="6" height="3" fill="#4ECDC4"/>
+            </svg>
+          </div>
+          <h3>组织统筹</h3>
+          <p class="scene-sub">团队协作与事务落地</p>
+          <p class="scene-line">负责学生志愿者协会的整体运转：排班、分工、对外对接与结果验收。</p>
+          <p class="scene-tags">
+            <span class="tag t2">学生组织管理</span>
+            <span class="tag">活动统筹</span>
+            <span class="tag t2">招就处值班</span>
+          </p>
+        </div>
+
+        <div class="scene">
+          <div class="scene-art">
+            <svg viewBox="0 0 72 40" shape-rendering="crispEdges" role="img" aria-label="绿袍巫师向一台机器人发出指令，指令以对话气泡形式传递">
+              <title>AI 协作</title>
+              <rect x="0" y="38" width="72" height="1" fill="#E6DCC9"/>
+              <use href="#wiz" transform="translate(2,6)"/>
+              <rect x="25" y="10" width="2" height="2" fill="#FF6B8A"/>
+              <rect x="27" y="11" width="1" height="1" fill="#FFC94D"/>
+              <rect x="28" y="8" width="14" height="10" fill="#2B2B38"/>
+              <rect x="29" y="9" width="12" height="8" fill="#FFFFFF"/>
+              <rect x="31" y="11" width="8" height="1" fill="#2B2B38"/>
+              <rect x="31" y="13" width="6" height="1" fill="#E6DCC9"/>
+              <rect x="39" y="18" width="3" height="3" fill="#2B2B38"/>
+              <rect x="43" y="12" width="3" height="1" fill="#E6DCC9"/>
+              <rect x="53" y="3" width="5" height="4" fill="#2B2B38"/>
+              <rect x="54" y="4" width="3" height="2" fill="#FF6B8A"/>
+              <rect x="55" y="7" width="1" height="3" fill="#E6DCC9"/>
+              <rect x="46" y="10" width="20" height="18" fill="#2B2B38"/>
+              <rect x="47" y="11" width="18" height="16" fill="#FFF7EC"/>
+              <rect x="50" y="15" width="4" height="4" fill="#4ECDC4"/>
+              <rect x="51" y="16" width="2" height="2" fill="#2B2B38"/>
+              <rect x="58" y="15" width="4" height="4" fill="#4ECDC4"/>
+              <rect x="59" y="16" width="2" height="2" fill="#2B2B38"/>
+              <rect x="53" y="22" width="6" height="2" fill="#2B2B38"/>
+              <rect x="49" y="27" width="5" height="11" fill="#2B2B38"/>
+              <rect x="50" y="30" width="3" height="2" fill="#4ECDC4"/>
+              <rect x="59" y="27" width="5" height="11" fill="#2B2B38"/>
+              <rect x="60" y="30" width="3" height="2" fill="#4ECDC4"/>
+            </svg>
+          </div>
+          <h3>AI 协作</h3>
+          <p class="scene-sub">需求转译与稳定输出</p>
+          <p class="scene-line">把模糊需求拆成明确的输入、格式与边界条件，让模型稳定产出可用结果。</p>
+          <p class="scene-tags">
+            <span class="tag t3">提示词工程</span>
+            <span class="tag">AI 编程协作</span>
+            <span class="tag t3">AI 生图</span>
+            <span class="tag">大模型 API</span>
+          </p>
+        </div>
+
+        <div class="scene">
+          <div class="scene-art">
+            <svg viewBox="0 0 72 40" shape-rendering="crispEdges" role="img" aria-label="绿袍巫师身旁浮着一个终端窗口，右侧连接一个数据库">
+              <title>工具开发</title>
+              <rect x="0" y="38" width="72" height="1" fill="#E6DCC9"/>
+              <use href="#wiz" transform="translate(2,6)"/>
+              <rect x="29" y="4" width="27" height="19" fill="#2B2B38"/>
+              <rect x="30" y="5" width="25" height="17" fill="#FFFFFF"/>
+              <rect x="30" y="5" width="25" height="3" fill="#E6DCC9"/>
+              <rect x="31" y="6" width="2" height="1" fill="#FF6B8A"/>
+              <rect x="34" y="6" width="2" height="1" fill="#FFC94D"/>
+              <rect x="37" y="6" width="2" height="1" fill="#4ECDC4"/>
+              <rect x="31" y="10" width="7" height="1" fill="#4ECDC4"/>
+              <rect x="39" y="10" width="10" height="1" fill="#2B2B38"/>
+              <rect x="33" y="13" width="13" height="1" fill="#2B2B38"/>
+              <rect x="31" y="16" width="5" height="1" fill="#FF6B8A"/>
+              <rect x="37" y="16" width="9" height="1" fill="#2B2B38"/>
+              <rect x="33" y="19" width="11" height="1" fill="#4ECDC4"/>
+              <rect x="45" y="19" width="2" height="1" fill="#FFC94D"/>
+              <rect x="56" y="16" width="4" height="1" fill="#E6DCC9"/>
+              <rect x="60" y="22" width="12" height="15" fill="#2B2B38"/>
+              <rect x="61" y="23" width="10" height="13" fill="#FFFFFF"/>
+              <rect x="61" y="23" width="10" height="3" fill="#4ECDC4"/>
+              <rect x="61" y="29" width="10" height="1" fill="#E6DCC9"/>
+              <rect x="61" y="32" width="10" height="3" fill="#4ECDC4"/>
+            </svg>
+          </div>
+          <h3>工具开发</h3>
+          <p class="scene-sub">从需求定义到上线</p>
+          <p class="scene-line">独立完成需求拆解、技术选型、开发与部署，全流程无需多人接力。</p>
+          <p class="scene-tags">
+            <span class="tag t2">Python</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag t2">数据库</span>
+            <span class="tag">HTML·CSS·JS</span>
+            <span class="tag t2">响应式</span>
+          </p>
+        </div>
+
+        <div class="scene">
+          <div class="scene-art">
+            <svg viewBox="0 0 72 40" shape-rendering="crispEdges" role="img" aria-label="绿袍巫师守着一口坩埚，三张成品图文卡片从中升起">
+              <title>内容生产</title>
+              <rect x="0" y="38" width="72" height="1" fill="#E6DCC9"/>
+              <use href="#wiz" transform="translate(2,6)"/>
+              <rect x="42" y="5" width="2" height="2" fill="#FFC94D"/>
+              <rect x="53" y="2" width="2" height="2" fill="#4ECDC4"/>
+              <rect x="66" y="8" width="2" height="2" fill="#FF6B8A"/>
+              <rect x="36" y="10" width="10" height="12" fill="#2B2B38"/>
+              <rect x="37" y="11" width="8" height="10" fill="#FFFFFF"/>
+              <rect x="38" y="12" width="6" height="6" fill="#4ECDC4"/>
+              <rect x="38" y="19" width="6" height="1" fill="#E6DCC9"/>
+              <rect x="47" y="6" width="10" height="12" fill="#2B2B38"/>
+              <rect x="48" y="7" width="8" height="10" fill="#FFFFFF"/>
+              <rect x="49" y="8" width="6" height="6" fill="#FFC94D"/>
+              <rect x="49" y="15" width="6" height="1" fill="#E6DCC9"/>
+              <rect x="58" y="12" width="10" height="12" fill="#2B2B38"/>
+              <rect x="59" y="13" width="8" height="10" fill="#FFFFFF"/>
+              <rect x="60" y="14" width="6" height="6" fill="#FF6B8A"/>
+              <rect x="60" y="21" width="6" height="1" fill="#E6DCC9"/>
+              <rect x="32" y="22" width="28" height="3" fill="#2B2B38"/>
+              <rect x="34" y="25" width="24" height="13" fill="#2B2B38"/>
+              <rect x="35" y="26" width="22" height="10" fill="#FF6B8A"/>
+              <rect x="37" y="26" width="14" height="1" fill="#FFF7EC"/>
+            </svg>
+          </div>
+          <h3>内容生产</h3>
+          <p class="scene-sub">从稿件到成片</p>
+          <p class="scene-line">一份稿件进入，配图、封面与成片在同一流程上完成，脚本与版式同步产出。</p>
+          <p class="scene-tags">
+            <span class="tag t3">短视频脚本</span>
+            <span class="tag">配图与封面</span>
+            <span class="tag t3">小红书图文</span>
+            <span class="tag">剪辑</span>
+          </p>
+        </div>
+
+        <div class="scene">
+          <div class="scene-art">
+            <svg viewBox="0 0 72 40" shape-rendering="crispEdges" role="img" aria-label="绿袍巫师手持放大镜审阅带柱状图的报表，下方是逐条复核清单">
+              <title>数据核验</title>
+              <rect x="0" y="38" width="72" height="1" fill="#E6DCC9"/>
+              <use href="#wiz" transform="translate(2,6)"/>
+              <rect x="27" y="12" width="2" height="2" fill="#FF6B8A"/>
+              <rect x="30" y="6" width="27" height="22" fill="#2B2B38"/>
+              <rect x="31" y="7" width="25" height="20" fill="#FFFFFF"/>
+              <rect x="33" y="9" width="10" height="1" fill="#2B2B38"/>
+              <rect x="33" y="12" width="20" height="1" fill="#E6DCC9"/>
+              <rect x="34" y="19" width="3" height="6" fill="#FFC94D"/>
+              <rect x="39" y="15" width="3" height="10" fill="#4ECDC4"/>
+              <rect x="44" y="21" width="3" height="4" fill="#FF6B8A"/>
+              <rect x="49" y="17" width="3" height="8" fill="#4ECDC4"/>
+              <rect x="32" y="25" width="22" height="1" fill="#2B2B38"/>
+              <rect x="57" y="20" width="2" height="1" fill="#E6DCC9"/>
+              <rect x="52" y="22" width="13" height="13" fill="#2B2B38"/>
+              <rect x="54" y="24" width="9" height="9" fill="#FFFFFF"/>
+              <rect x="63" y="33" width="3" height="5" fill="#2B2B38"/>
+              <rect x="30" y="30" width="17" height="8" fill="#2B2B38"/>
+              <rect x="31" y="31" width="15" height="6" fill="#FFFFFF"/>
+              <rect x="32" y="32" width="2" height="2" fill="#4ECDC4"/>
+              <rect x="35" y="32" width="8" height="1" fill="#E6DCC9"/>
+              <rect x="32" y="35" width="2" height="2" fill="#FF6B8A"/>
+              <rect x="35" y="35" width="6" height="1" fill="#E6DCC9"/>
+            </svg>
+          </div>
+          <h3>数据核验</h3>
+          <p class="scene-sub">统计口径与逐条复核</p>
+          <p class="scene-line">先统一统计口径，再让结论落回原始记录；模型返回的假阳性单独出清单复核。</p>
+          <p class="scene-tags">
+            <span class="tag t2">GEO 监测</span>
+            <span class="tag">数据面板</span>
+            <span class="tag t2">口径设计</span>
+            <span class="tag">Excel</span>
+          </p>
+        </div>
+
+        <div class="scene">
+          <div class="scene-art">
+            <svg viewBox="0 0 72 40" shape-rendering="crispEdges" role="img" aria-label="绿袍巫师向前奔跑，身后留下速度线与脚印，右侧是里程读数与终点旗">
+              <title>长期投入</title>
+              <rect x="0" y="38" width="72" height="1" fill="#E6DCC9"/>
+              <rect x="6" y="37" width="2" height="1" fill="#E6DCC9"/>
+              <rect x="14" y="37" width="2" height="1" fill="#E6DCC9"/>
+              <rect x="22" y="37" width="2" height="1" fill="#E6DCC9"/>
+              <rect x="4" y="14" width="9" height="1" fill="#4ECDC4"/>
+              <rect x="8" y="18" width="10" height="1" fill="#4ECDC4"/>
+              <rect x="4" y="22" width="8" height="1" fill="#4ECDC4"/>
+              <rect x="10" y="26" width="9" height="1" fill="#4ECDC4"/>
+              <rect x="5" y="30" width="7" height="1" fill="#4ECDC4"/>
+              <use href="#wiz" transform="translate(26,6)"/>
+              <rect x="54" y="6" width="16" height="9" fill="#2B2B38"/>
+              <rect x="55" y="7" width="14" height="7" fill="#FFFFFF"/>
+              <rect x="57" y="9" width="2" height="3" fill="#FF6B8A"/>
+              <rect x="60" y="9" width="2" height="3" fill="#FFC94D"/>
+              <rect x="63" y="9" width="2" height="3" fill="#4ECDC4"/>
+              <rect x="62" y="16" width="1" height="22" fill="#E6DCC9"/>
+              <rect x="63" y="16" width="7" height="5" fill="#2B2B38"/>
+              <rect x="63" y="17" width="6" height="3" fill="#FFC94D"/>
+            </svg>
+          </div>
+          <h3>长期投入</h3>
+          <p class="scene-sub">持续稳定的执行</p>
+          <p class="scene-line">长跑从初中延续至今。这条线说明的是：我能把一件事做很久，而不是做一阵。</p>
+          <p class="scene-tags">
+            <span class="tag t3">长期主义</span>
+            <span class="tag">耐力</span>
+            <span class="tag t3">独立推进</span>
+          </p>
+        </div>
+
+        <div class="scene">
+          <div class="scene-art">
+            <svg viewBox="0 0 72 40" shape-rendering="crispEdges" role="img" aria-label="绿袍巫师身旁放着一只敞开的工具箱，扳手、笔、调色板与齿轮从中冒出">
+              <title>通用技能</title>
+              <rect x="0" y="38" width="72" height="1" fill="#E6DCC9"/>
+              <use href="#wiz" transform="translate(2,6)"/>
+              <rect x="34" y="9" width="7" height="4" fill="#2B2B38"/>
+              <rect x="36" y="10" width="3" height="2" fill="#E6DCC9"/>
+              <rect x="36" y="13" width="3" height="11" fill="#2B2B38"/>
+              <rect x="43" y="6" width="3" height="2" fill="#FF6B8A"/>
+              <rect x="43" y="8" width="3" height="16" fill="#2B2B38"/>
+              <rect x="43" y="11" width="3" height="2" fill="#4ECDC4"/>
+              <rect x="49" y="10" width="10" height="10" fill="#2B2B38"/>
+              <rect x="50" y="11" width="8" height="8" fill="#FFF7EC"/>
+              <rect x="51" y="12" width="2" height="2" fill="#FF6B8A"/>
+              <rect x="55" y="12" width="2" height="2" fill="#FFC94D"/>
+              <rect x="51" y="16" width="2" height="2" fill="#4ECDC4"/>
+              <rect x="55" y="16" width="2" height="2" fill="#2B2B38"/>
+              <rect x="61" y="5" width="2" height="1" fill="#2B2B38"/>
+              <rect x="64" y="5" width="2" height="1" fill="#2B2B38"/>
+              <rect x="59" y="6" width="9" height="9" fill="#2B2B38"/>
+              <rect x="60" y="7" width="7" height="7" fill="#E6DCC9"/>
+              <rect x="62" y="9" width="3" height="3" fill="#2B2B38"/>
+              <rect x="58" y="9" width="1" height="2" fill="#2B2B38"/>
+              <rect x="68" y="9" width="1" height="2" fill="#2B2B38"/>
+              <rect x="61" y="14" width="2" height="1" fill="#2B2B38"/>
+              <rect x="64" y="14" width="2" height="1" fill="#2B2B38"/>
+              <rect x="46" y="21" width="6" height="3" fill="#2B2B38"/>
+              <rect x="47" y="22" width="4" height="1" fill="#FFF7EC"/>
+              <rect x="34" y="24" width="30" height="14" fill="#2B2B38"/>
+              <rect x="35" y="25" width="28" height="12" fill="#FFC94D"/>
+              <rect x="35" y="25" width="28" height="2" fill="#E6DCC9"/>
+              <rect x="44" y="31" width="10" height="3" fill="#2B2B38"/>
+              <rect x="28" y="33" width="2" height="2" fill="#FFC94D"/>
+              <rect x="66" y="30" width="3" height="3" fill="#4ECDC4"/>
+              <rect x="66" y="34" width="3" height="3" fill="#FF6B8A"/>
+            </svg>
+          </div>
+          <h3>通用技能</h3>
+          <p class="scene-sub">按需学习与工具迁移</p>
+          <p class="scene-line">工具随需求更换，交付标准不变；实际用过的工具数量远超此处所列。</p>
+          <p class="scene-tags">
+            <span class="tag t2">Word</span>
+            <span class="tag">视觉配色</span>
+            <span class="tag t2">剪映</span>
+            <span class="tag">各类一次性工具</span>
+          </p>
+        </div>
+
+      </div>
+
+      <p class="scene-note">
+        七幅情景共用同一形象，指向同一个结论：<strong>给我一个完整需求，我可以独立完成从定义到交付的全过程。</strong>
+      </p>
+    </section>
+
+    <!-- ===== 05 履历 ===== -->
+    <section id="s5" class="slide" data-name="履历">
+      <div class="sec-no">05 · career</div>
+      <h2>履历</h2>
+      <p class="lead">从初中的团支书，到大学带一个协会；从剪辑和助理做起，到现在写后端、做内容。</p>
+
+      <ul class="tl">
+        <li class="tl-item">
+          <span class="ln"></span><span class="nd"><i></i></span>
+          <div class="card">
+            <div class="tl-time">初中</div>
+            <h3>加入中国共青团 · 班级团支书</h3>
+            <p>2018 年入团。在班里担任团支书，负责团务和班级活动。</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <span class="ln"></span><span class="nd"><i></i></span>
+          <div class="card">
+            <div class="tl-time">高中</div>
+            <h3>班级团支书 · 校学生会会长</h3>
+            <p>继续做班级团支书，同时担任校学生会会长。活动怎么排、人怎么分，从这里开始上手。</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <span class="ln"></span><span class="nd"><i></i></span>
+          <div class="card">
+            <div class="tl-time">2024.09 – 至今</div>
+            <h3>四川文化产业职业学院 · 数字广播电视技术</h3>
+            <p>2024 级，现大三，2027 年 6 月毕业。</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <span class="ln"></span><span class="nd"><i></i></span>
+          <div class="card">
+            <div class="tl-time">2024 – 至今</div>
+            <h3>优联协会（招生就业处学生志愿者协会）· 从志愿者到会长</h3>
+            <p>入学后加入校团委和优联协会，做招生就业处的学生志愿者工作。做了三年，现在轮到我带着大家做。</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <span class="ln"></span><span class="nd"><i></i></span>
+          <div class="card">
+            <div class="tl-time">2025 春 – 2025 秋</div>
+            <h3>学校产教融合基地 · 兼职剪辑</h3>
+            <p>在学校的产教融合基地承接视频剪辑，按交付时间出片。</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <span class="ln"></span><span class="nd"><i></i></span>
+          <div class="card">
+            <div class="tl-time">2025.11 – 至今</div>
+            <h3>曼游生涯 · 从助理到后端开发</h3>
+            <p>最先做创始人助理，后来转到开发岗，参与产品后端开发。</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <span class="ln"></span><span class="nd"><i></i></span>
+          <div class="card">
+            <div class="tl-time">2026 – 至今</div>
+            <h3>《创业者的 101 个法律坑》· 内容创作与输出</h3>
+            <p>系列视频的脚本、台词、配图与封面由我统一产出，多个平台同步发布。</p>
+          </div>
+        </li>
+        <li class="tl-item future">
+          <span class="ln"></span><span class="nd"><i></i></span>
+          <div class="card">
+            <div class="tl-time">2027.04.15 · 未来</div>
+            <h3>专升本考试</h3>
+            <p>目标：专升本。院校待定。</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ===== 06 合作 ===== -->
+    <section id="s6" class="slide" data-name="合作">
+      <div class="sec-no">06 · contact</div>
+      <h2>合作</h2>
+      <p class="lead">有想做的事，直接说就行。</p>
+
+      <div class="card">
+        <div class="contact-row">
+          <span class="k">邮箱</span>
+          <span class="v"><a href="mailto:2190382929@qq.com">2190382929@qq.com</a></span>
+        </div>
+        <div class="contact-row">
+          <span class="k">手机</span>
+          <span class="v" id="phoneSlot">
+            <button class="reveal-phone" id="phoneBtn" type="button">点击显示（仅用于商务合作）</button>
+          </span>
+        </div>
+        <div class="contact-row">
+          <span class="k">怎么聊</span>
+          <span class="v">附上背景和你想要的结果，我这边会快很多。</span>
+        </div>
+      </div>
+
+      <div class="card scope">
+        <h3>可以找我做什么</h3>
+        <div class="contact-row">
+          <span class="k">开发</span>
+          <span class="v">网站和小工具：单页工具、查询与表单类站点、数据看板。从需求到上线一个人做完，移动端优先。</span>
+        </div>
+        <div class="contact-row">
+          <span class="k">内容</span>
+          <span class="v">一条内容生产线。一份稿子进去，脚本、配图、封面出来，多平台同步发；短视频和图文两条线都在跑。</span>
+        </div>
+        <div class="contact-row">
+          <span class="k">AI 落地</span>
+          <span class="v">把重复劳动拆成可复用的提示词流程，让它稳定出结果。也做 AI 可见度监测：品牌有没有被 AI 提到、哪些只是「提到但查不到」的假阳性，会给一份能逐条复核的清单。</span>
+        </div>
+        <div class="contact-row">
+          <span class="k">统筹</span>
+          <span class="v">需要有人把散的事收口——排期、分工、对外对接、结果验收。从初中带班级到现在带协会，这类活一直在做。</span>
+        </div>
+        <div class="contact-row">
+          <span class="k">时间</span>
+          <span class="v">在校大三，时间集中在晚上和周末。需要长期驻场的项目，我这边排不开。</span>
+        </div>
+        <p class="scope-foot">不确定算不算你要的，先发一句来问也行。</p>
+      </div>
+  </section>
+ </div>
+</div>
+
+<nav class="rail" id="rail" aria-label="页面导航"></nav>
+
+<footer class="statusbar">
+  <div class="sb-horizon" id="horizon" aria-hidden="true"></div>
+  <div class="sb-in">
+    <span class="px">姜佳乐</span>
+    <span class="sb-mid">一个人，把想法做成能用的东西</span>
+    <span class="sb-pg"><span id="pgName">封面</span> · <b id="pgNow">01</b>/<span id="pgAll">06</span></span>
+  </div>
+</footer>
+
+<div id="wipe" aria-hidden="true"></div>
+
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="查看大图">
+  <button id="lbClose" type="button" aria-label="关闭">×</button>
+  <img id="lbImg" src="" alt="">
+  <div id="lbHint">点任意处或按 Esc 关闭</div>
+</div>
+
+<div id="buddy">
+  <div class="bubble" id="buddyBubble" role="status" aria-live="polite"></div>
+  <div class="buddy-body">
+    <button id="closeBuddy" title="收起它（刷新页面即恢复）" aria-label="收起像素伙伴">×</button>
+    <svg id="buddySvg" width="80" height="80" viewBox="0 0 16 16" shape-rendering="crispEdges" role="img" aria-label="像素猫伙伴，点一下它会说话">
+      <title>像素猫伙伴</title>
+      <rect x="3" y="0" width="2" height="1" fill="#2B2B38"/>
+      <rect x="2" y="1" width="4" height="2" fill="#2B2B38"/>
+      <rect x="11" y="0" width="2" height="1" fill="#2B2B38"/>
+      <rect x="10" y="1" width="4" height="2" fill="#2B2B38"/>
+      <rect x="1" y="3" width="14" height="10" fill="#2B2B38"/>
+      <rect x="3" y="12" width="10" height="4" fill="#2B2B38"/>
+      <rect x="3" y="1" width="1" height="1" fill="#4ECDC4"/>
+      <rect x="11" y="1" width="1" height="1" fill="#4ECDC4"/>
+      <rect x="2" y="4" width="12" height="8" fill="#4ECDC4"/>
+      <rect x="4" y="13" width="8" height="2" fill="#4ECDC4"/>
+      <rect x="2" y="9" width="2" height="1" fill="#FF6B8A"/>
+      <rect x="11" y="9" width="2" height="1" fill="#FF6B8A"/>
+      <rect x="7" y="9" width="1" height="1" fill="#FF6B8A"/>
+      <rect x="6" y="10" width="3" height="1" fill="#2B2B38"/>
+      <g id="bEyeMove">
+        <g id="bEyeOpen">
+          <rect x="4" y="6" width="2" height="3" fill="#2B2B38"/>
+          <rect x="9" y="6" width="2" height="3" fill="#2B2B38"/>
+          <rect x="4" y="6" width="1" height="1" fill="#FFFFFF"/>
+          <rect x="9" y="6" width="1" height="1" fill="#FFFFFF"/>
+        </g>
+        <g id="bEyeShut" style="display:none">
+          <rect x="4" y="8" width="2" height="1" fill="#2B2B38"/>
+          <rect x="9" y="8" width="2" height="1" fill="#2B2B38"/>
+        </g>
+      </g>
+      <g id="bSleep" style="display:none">
+        <rect x="7" y="0" width="2" height="1" fill="#2B2B38"/>
+        <rect x="8" y="1" width="1" height="1" fill="#2B2B38"/>
+        <rect x="7" y="2" width="2" height="1" fill="#2B2B38"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 像素地平线
+  var h = document.getElementById('horizon'), jitter = [10,16,6,13,20,8,15,5,18,11,7,17,9,14,6,19,12,8,16,10,13,6,18,9,15,7,11,20,8,14];
+  for (var i=0;i<jitter.length;i++){
+    var b=document.createElement('i');
+    b.style.height = jitter[i]+'px';
+    b.style.opacity = (i%3===0)?'0':'1';
+    h.appendChild(b);
+  }
+
+  /* ===== 开场门禁 ===== */
+  var gated   = document.documentElement.hasAttribute('data-gate');
+  var heroEl  = document.querySelector('.hero');
+  var hintEl  = document.getElementById('gateHint');
+  var wipeEl  = document.getElementById('wipe');
+  var titleEl = document.querySelector('.hero h1');
+  var started = !gated, hintTimer = null, nudgeLock = false;
+
+  var goContent = function(){
+    // 翻页模式下「进入内容」＝ 直接切到第 2 页（封面是第 1 页）
+    goTo(1);
+  };
+
+  var sayHint = function(text, ms){
+    if(!hintEl) return;
+    hintEl.textContent = text;
+    hintEl.classList.add('on');
+    if(hintTimer) clearTimeout(hintTimer);
+    hintTimer = setTimeout(function(){ hintEl.classList.remove('on'); }, ms || 2400);
+  };
+
+  var nudge = function(){
+    if(started) return;
+    sayHint('不按开始，我可不让路 ↑', 2200);
+    if(reduce || nudgeLock) return;
+    nudgeLock = true;
+    setTimeout(function(){ nudgeLock = false; }, 280);
+    if(heroEl){
+      heroEl.animate([{transform:'translateY(0)'},{transform:'translateY(-4px)'},{transform:'translateY(0)'}],
+        {duration:180, easing:'steps(2)'});
+    }
+  };
+
+  var unlock = function(fast){
+    if(started) return;
+    started = true;
+    document.documentElement.removeAttribute('data-gate');
+    if(hintEl) hintEl.classList.remove('on');
+    var sbEl = document.getElementById('startBtn');
+    if(sbEl) sbEl.textContent = '继续浏览 ↓';
+
+    if(reduce || !wipeEl || !wipeEl.animate){
+      if(titleEl){ titleEl.style.transform = ''; titleEl.style.opacity = ''; }
+      goContent(false);
+      return;
+    }
+    if(titleEl){
+      titleEl.style.transition = 'transform .2s steps(4), opacity .2s steps(4)';
+      titleEl.style.transform = 'scale(.25)';
+      titleEl.style.opacity = '0';
+    }
+    var inDur = fast ? 150 : 200, outDur = 240;
+    var phaseDone = false, revealDone = false;
+
+    var reveal = function(){
+      if(revealDone) return;
+      revealDone = true;
+      wipeEl.style.display = 'none';
+      if(titleEl){ titleEl.style.transition = ''; titleEl.style.transform = ''; titleEl.style.opacity = ''; }
+    };
+    var phase2 = function(){
+      if(phaseDone) return;
+      phaseDone = true;
+      goContent(false);
+      var b = wipeEl.animate(
+        [{transform:'translateY(0)'},{transform:'translateY(100%)'}],
+        {duration:outDur, easing:'steps(4)', fill:'forwards'});
+      b.onfinish = reveal;
+      setTimeout(reveal, outDur + 160);
+    };
+
+    wipeEl.style.display = 'block';
+    var a = wipeEl.animate(
+      [{transform:'translateY(-100%)'},{transform:'translateY(0)'}],
+      {duration:inDur, easing:'steps(4)', fill:'forwards'});
+    a.onfinish = phase2;
+    setTimeout(phase2, inDur + 160);
+  };
+
+  if(gated){
+    var sb = document.getElementById('startBtn');
+    var sk = document.getElementById('skipBtn');
+    if(sb) sb.addEventListener('click', function(){ started ? goContent(true) : unlock(false); });
+    if(sk) sk.addEventListener('click', function(){ started ? goContent(true) : unlock(true); });
+
+    ['wheel','touchmove'].forEach(function(ev){
+      window.addEventListener(ev, function(e){
+        if(started) return;
+        e.preventDefault();
+        nudge();
+      }, {passive:false});
+    });
+
+    window.addEventListener('keydown', function(e){
+      if(started) return;
+      var tag = (e.target && e.target.tagName) || '';
+      if(tag === 'BUTTON' && (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter')) return;
+      if(e.key === 'Enter'){ e.preventDefault(); unlock(false); return; }
+      if(e.key === ' ' || e.key === 'Spacebar' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === 'End'){
+        e.preventDefault();
+        nudge();
+      }
+    });
+
+    document.addEventListener('click', function(e){
+      if(started) return;
+      var a = e.target && e.target.closest ? e.target.closest('a') : null;
+      if(a){ e.preventDefault(); nudge(); }
+    }, true);
+
+    setTimeout(function(){ if(!started) sayHint('准备好了就按开始 →', 3200); }, 1600);
+  }
+
+  /* ===== 翻页控制器（一屏一页 · PPT 式） ===== */
+  var deckEl   = document.getElementById('deck');
+  var trackEl  = document.getElementById('track');
+  var railEl   = document.getElementById('rail');
+  var pgNameEl = document.getElementById('pgName');
+  var pgNowEl  = document.getElementById('pgNow');
+  var pgAllEl  = document.getElementById('pgAll');
+  var lbEl     = document.getElementById('lightbox');
+  var slides   = deckEl ? Array.prototype.slice.call(deckEl.querySelectorAll('.slide')) : [];
+  var railDots = [], cur = 0, navLock = false, tipEl = null, tipShown = false;
+
+  var pad2 = function(n){ return (n < 10 ? '0' : '') + n; };
+  var lbOpen = function(){ return !!(lbEl && lbEl.classList.contains('on')); };
+
+  /* 把 .deck 的滚动量长期按在 0。
+     它只是个 overflow:hidden 的裁切容器，但「可裁切」不等于「不可滚动」：
+     带 #锚点 载入、Tab 焦点跳转、刷新恢复位置都可能让它带上 scrollLeft，
+     而它会和 translateX 叠加，让整个画面错位整整一页。 */
+  if (deckEl){
+    var pinDeck = function(){
+      if (deckEl.scrollLeft !== 0) deckEl.scrollLeft = 0;
+      if (deckEl.scrollTop  !== 0) deckEl.scrollTop  = 0;
+    };
+    deckEl.addEventListener('scroll', pinDeck, {passive:true});
+    window.addEventListener('hashchange', pinDeck);
+    window.addEventListener('load', pinDeck);
+    pinDeck();
+  }
+
+  var showTip = function(){
+    if (tipShown || reduce || !slides.length) return;
+    tipShown = true;
+    tipEl = document.createElement('div');
+    tipEl.className = 'deck-tip';
+    tipEl.setAttribute('role', 'status');
+    tipEl.textContent = '← → 翻页 · 也可点右侧页码';
+    document.body.appendChild(tipEl);
+    requestAnimationFrame(function(){ tipEl.classList.add('on'); });
+    setTimeout(function(){ tipEl.classList.remove('on'); }, 4400);
+    setTimeout(function(){ if(tipEl && tipEl.parentNode) tipEl.parentNode.removeChild(tipEl); }, 5200);
+  };
+
+  var goTo = function(i){
+    if (!slides.length || !trackEl) return;
+    if (i < 0) i = 0;
+    if (i > slides.length - 1) i = slides.length - 1;
+    var sec = slides[i];
+    // 已在目标页：不重复播放动画（越界回弹、点当前页码都会走到这里）
+    if (i === cur && sec.classList.contains('is-active')) return;
+    cur = i;
+
+    trackEl.style.transform = 'translateX(' + (-100 * i) + '%)';  // 移轨道，裁切框不动
+    deckEl.scrollLeft = 0;   // 清掉浏览器因锚点/焦点产生的滚动偏移，避免再叠一层错位
+    deckEl.scrollTop  = 0;
+
+    // 让进入动画可重播：先摘掉激活态并强制回流，再加回来
+    sec.classList.remove('is-active');
+    void sec.offsetWidth;
+    sec.classList.add('is-active');
+    sec.scrollTop = 0;
+
+    // 其余页延后收起 —— 翻页途中上一页保持可见，滑出去才自然。
+    // 注意这里读的是触发时的 cur，不能用闭包里的 i：
+    // 否则连翻两页时，上一次的定时器会把「当前页」的激活态一起撤掉，画面直接空白。
+    setTimeout(function(){
+      slides.forEach(function(s, k){ if (k !== cur) s.classList.remove('is-active'); });
+    }, reduce ? 0 : 460);
+
+    if (pgNowEl)  pgNowEl.textContent  = pad2(i + 1);
+    if (pgNameEl) pgNameEl.textContent = sec.getAttribute('data-name') || '';
+    railDots.forEach(function(d, k){ d.classList.toggle('on', k === i); });
+
+    try {
+      history.replaceState(null, '', i === 0 ? location.pathname + location.search : '#' + sec.id);
+    } catch(err){ /* file:// 下可能不允许改 history，忽略 */ }
+
+    if (i > 0) showTip();
+  };
+
+  // 翻页一步：当前页还有没滚完的内容，就先滚内容，滚到边界才翻页
+  var step = function(dir){
+    if (!started || !slides.length) return;
+    var sec = slides[cur];
+    if (sec){
+      var canDown = sec.scrollHeight - sec.scrollTop - sec.clientHeight > 24;
+      var canUp   = sec.scrollTop > 24;
+      if (dir > 0 && canDown){
+        sec.scrollBy({top: Math.round(sec.clientHeight * 0.82), behavior: 'smooth'});
+        return;
+      }
+      if (dir < 0 && canUp){
+        sec.scrollBy({top: -Math.round(sec.clientHeight * 0.82), behavior: 'smooth'});
+        return;
+      }
+    }
+    goTo(cur + dir);
+  };
+
+  if (slides.length && deckEl && railEl){
+    // 右侧页码轨
+    slides.forEach(function(sec, i){
+      var name = sec.getAttribute('data-name') || '';
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'rail-dot';
+      b.setAttribute('aria-label', '第 ' + pad2(i + 1) + ' 页 · ' + name);
+      b.innerHTML = '<span class="rail-t">' + pad2(i + 1) + ' ' + name + '</span><span class="rail-b"></span>';
+      b.addEventListener('click', function(){ if (started) goTo(i); });
+      railEl.appendChild(b);
+      railDots.push(b);
+    });
+    if (pgAllEl) pgAllEl.textContent = pad2(slides.length);
+
+    // 键盘
+    window.addEventListener('keydown', function(e){
+      if (!started || lbOpen()) return;
+      var tag = (e.target && e.target.tagName) || '';
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      if ((e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') && tag === 'BUTTON') return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'Spacebar'){
+        e.preventDefault(); step(1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'){
+        e.preventDefault(); step(-1);
+      } else if (e.key === 'Home'){
+        e.preventDefault(); goTo(0);
+      } else if (e.key === 'End'){
+        e.preventDefault(); goTo(slides.length - 1);
+      }
+    }, {passive:false});
+
+    // 滚轮：内容滚到边界才翻页，配 700ms 节流避免触控板一滑翻三页
+    deckEl.addEventListener('wheel', function(e){
+      if (!started || lbOpen()) return;
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      if (Math.abs(e.deltaY) < 5) return;
+      var sec = slides[cur];
+      if (!sec) return;
+      var atTop    = sec.scrollTop <= 0;
+      var atBottom = sec.scrollTop + sec.clientHeight >= sec.scrollHeight - 2;
+      if (e.deltaY > 0 && !atBottom) return;
+      if (e.deltaY < 0 && !atTop) return;
+      e.preventDefault();
+      if (navLock) return;
+      navLock = true;
+      setTimeout(function(){ navLock = false; }, 700);
+      step(e.deltaY > 0 ? 1 : -1);
+    }, {passive:false});
+
+    // 触摸：横向滑动翻页，纵向滑到边界也可翻
+    var tX = 0, tY = 0, tOn = false;
+    deckEl.addEventListener('touchstart', function(e){
+      if (!started || lbOpen() || e.touches.length !== 1){ tOn = false; return; }
+      tOn = true; tX = e.touches[0].clientX; tY = e.touches[0].clientY;
+    }, {passive:true});
+    deckEl.addEventListener('touchend', function(e){
+      if (!tOn || !started || lbOpen()) return;
+      tOn = false;
+      var t = e.changedTouches && e.changedTouches[0];
+      if (!t) return;
+      var dx = t.clientX - tX, dy = t.clientY - tY;
+      if (Math.abs(dx) > 56 && Math.abs(dx) > Math.abs(dy) * 1.2){
+        step(dx < 0 ? 1 : -1);
+        return;
+      }
+      var sec = slides[cur];
+      if (!sec || Math.abs(dy) < 64 || Math.abs(dy) < Math.abs(dx)) return;
+      var atTop    = sec.scrollTop <= 0;
+      var atBottom = sec.scrollTop + sec.clientHeight >= sec.scrollHeight - 2;
+      if (dy < 0 && atBottom) step(1);
+      else if (dy > 0 && atTop) step(-1);
+    }, {passive:true});
+
+    // 顶部导航：由跳锚点改为翻页
+    document.querySelectorAll('.nav nav a').forEach(function(a){
+      a.addEventListener('click', function(e){
+        e.preventDefault();
+        var id = (a.getAttribute('href') || '').replace('#', '');
+        for (var k = 0; k < slides.length; k++){
+          if (slides[k].id === id){ goTo(k); return; }
+        }
+      });
+    });
+  }
+
+  // 点击粒子
+  var colors = ['#FF6B8A','#4ECDC4','#FFC94D'];
+  document.addEventListener('click', function(e){
+    if(reduce) return;
+    for(var i=0;i<6;i++){
+      var s=document.createElement('span');
+      s.className='spark';
+      s.style.left=e.clientX+'px'; s.style.top=e.clientY+'px';
+      s.style.background=colors[i%3];
+      document.body.appendChild(s);
+      var dx=(Math.random()-0.5)*130, dy=(Math.random()-0.7)*130;
+      s.animate([
+        {transform:'translate(0,0)', opacity:1},
+        {transform:'translate('+dx+'px,'+dy+'px)', opacity:0}
+      ],{duration:500, easing:'steps(5)', fill:'forwards'});
+      setTimeout(function(el){return function(){el.remove();};}(s), 520);
+    }
+  });
+
+  /* ===== 截图灯箱 ===== */
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  if(lb && lbImg){
+    var openLb = function(src, alt){
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lb.classList.add('on');
+      document.body.style.overflow = 'hidden';
+    };
+    var closeLb = function(){
+      lb.classList.remove('on');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    };
+    document.querySelectorAll('.wk-shot img').forEach(function(img){
+      img.classList.add('shot-zoom');
+      img.addEventListener('click', function(){
+        openLb(img.getAttribute('src'), img.getAttribute('alt'));
+      });
+    });
+    lb.addEventListener('click', function(e){
+      if(e.target === lbImg) return;
+      closeLb();
+    });
+    window.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && lb.classList.contains('on')) closeLb();
+    });
+  }
+
+  /* ===== 手机号：点击才拼接显示，不进静态源码 ===== */
+  var pb = document.getElementById('phoneBtn');
+  if(pb){
+    pb.addEventListener('click', function(){
+      var a=['138','8265','1756'], n=a.join('');
+      var slot = document.getElementById('phoneSlot');
+      slot.innerHTML = '<a href="tel:'+n+'">'+n+'</a>';
+    });
+  }
+
+  /* ===== 像素伙伴 ===== */
+  var wrap = document.getElementById('buddy');
+  var svg  = document.getElementById('buddySvg');
+  if(wrap && svg){
+    var eyeMove = document.getElementById('bEyeMove');
+    var eyeOpen = document.getElementById('bEyeOpen');
+    var eyeShut = document.getElementById('bEyeShut');
+    var sleepZ  = document.getElementById('bSleep');
+    var bubbleEl= document.getElementById('buddyBubble');
+    var closer  = document.getElementById('closeBuddy');
+
+    var LINES = ['你好呀','今天也要加油','在写代码吗','记得喝口水','慢慢来，不着急','我在呢','快到了，再撑一下','嘿，你回来啦'];
+    var idx = -1, sleeping = false, lastAct = Date.now(), bubTimer = null;
+
+    var say = function(text, ms){
+      bubbleEl.textContent = text;
+      bubbleEl.classList.add('on');
+      if(bubTimer) clearTimeout(bubTimer);
+      bubTimer = setTimeout(function(){ bubbleEl.classList.remove('on'); }, ms || 2300);
+    };
+    var eyesOpen = function(){
+      eyeOpen.style.display = ''; eyeShut.style.display = 'none';
+      if(sleeping){ sleeping = false; sleepZ.style.display = 'none'; }
+    };
+    var eyesShut = function(){ eyeOpen.style.display = 'none'; eyeShut.style.display = ''; };
+    var dozeOff = function(){ sleeping = true; eyesShut(); sleepZ.style.display = ''; say('呼……', 2400); };
+    var touch = function(){ lastAct = Date.now(); if(sleeping) eyesOpen(); };
+
+    if(!reduce){
+      setInterval(function(){
+        if(sleeping) return;
+        eyesShut();
+        setTimeout(eyesOpen, 130);
+      }, 2600);
+
+      document.addEventListener('mousemove', function(e){
+        var r = svg.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2);
+        var dy = e.clientY - (r.top + r.height / 2);
+        var mx = dx > 70 ? 1 : (dx < -70 ? -1 : 0);
+        var my = dy > 70 ? 1 : (dy < -70 ? -1 : 0);
+        eyeMove.setAttribute('transform', 'translate(' + mx + ',' + my + ')');
+      });
+    }
+
+    svg.addEventListener('mouseenter', function(){
+      touch();
+      if(reduce) return;
+      svg.animate([{transform:'translateY(0)'},{transform:'translateY(-10px)'},{transform:'translateY(0)'}],
+        {duration:260, easing:'steps(3)'});
+    });
+
+    svg.addEventListener('click', function(e){
+      e.stopPropagation();
+      touch();
+      var r = svg.getBoundingClientRect();
+      if(!reduce){
+        svg.animate([
+          {transform:'translateY(0) scale(1)'},
+          {transform:'translateY(-14px) scale(1.07)'},
+          {transform:'translateY(0) scale(1)'}
+        ],{duration:320, easing:'steps(4)'});
+        for(var i=0;i<3;i++){
+          var hh = document.createElement('div');
+          hh.className = 'heart';
+          hh.innerHTML = '<svg viewBox="0 0 7 6" width="21" height="18" shape-rendering="crispEdges">'
+            + '<rect x="1" y="0" width="2" height="1" fill="#FF6B8A"/><rect x="4" y="0" width="2" height="1" fill="#FF6B8A"/>'
+            + '<rect x="0" y="1" width="7" height="2" fill="#FF6B8A"/><rect x="1" y="3" width="5" height="1" fill="#FF6B8A"/>'
+            + '<rect x="2" y="4" width="3" height="1" fill="#FF6B8A"/><rect x="3" y="5" width="1" height="1" fill="#FF6B8A"/></svg>';
+          hh.style.left = (r.left + r.width/2 - 10 + i*8) + 'px';
+          hh.style.top  = (r.top + 4) + 'px';
+          document.body.appendChild(hh);
+          var hx = (i-1)*22 + (Math.random()-0.5)*20;
+          hh.animate([{transform:'translate(0,0)',opacity:1},{transform:'translate(' + hx + 'px,-58px)',opacity:0}],
+            {duration:900, easing:'steps(6)', fill:'forwards'});
+          (function(el){ setTimeout(function(){ el.remove(); }, 930); })(hh);
+        }
+      }
+      idx = (idx + 1 + Math.floor(Math.random() * (LINES.length - 1))) % LINES.length;
+      say(LINES[idx], 2500);
+    });
+
+    ['mousemove','click','scroll','keydown','touchstart'].forEach(function(ev){
+      window.addEventListener(ev, touch, {passive:true});
+    });
+    setInterval(function(){
+      if(!sleeping && Date.now() - lastAct > 40000) dozeOff();
+    }, 5000);
+
+    if(!reduce){
+      setTimeout(function(){ if(!sleeping) say('点我一下', 3200); }, 2200);
+    }
+
+    closer.addEventListener('click', function(e){
+      e.stopPropagation();
+      wrap.style.display = 'none';
+    });
+  }
+
+  /* ===== 初始化：落位首屏（带锚点直达时落到对应页） ===== */
+  if (slides.length){
+    var initIdx = 0;
+    if (location.hash){
+      var hid = location.hash.replace('#', '');
+      for (var n = 0; n < slides.length; n++){
+        if (slides[n].id === hid){ initIdx = n; break; }
+      }
+    }
+    goTo(initIdx);
+  }
+})();
+</script>
+</body>
+</html>
